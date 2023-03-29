@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import CourseCard from '../components/CourseCard'
+// import CourseCard from '../components/CourseCard'
 import { useRouter } from 'next/router';
 import { api } from "~/utils/api";
 
@@ -38,6 +38,10 @@ export default function Id() {
         }
     }
 
+    const navigateHome = async function(){
+        await router.push('/courses')
+    }
+
     useEffect(()=>{
         setId(Number(router.query.id) || 0)
         setName(String(data?.course?.name));
@@ -50,9 +54,9 @@ export default function Id() {
         <div className='text-center text-2xl my-10'>Description: {data?.course?.description}</div>
         <div className='flex flex-row justify-around w-1/4'>
             <div onClick={()=>editCourse()} className='cursor-pointer text-xl rounded p-2 bg-orange-400'>Update</div>
-            <div onClick={()=>deleteCourse(id)} className='cursor-pointer text-xl rounded p-2 bg-red-500'>Delete</div>
+            <div onClick={()=> void deleteCourse(id)} className='cursor-pointer text-xl rounded p-2 bg-red-500'>Delete</div>
         </div>
-        <div onClick={async()=> await router.push('/courses')} className='cursor-pointer text-xl rounded p-2 bg-green-500 mt-10'>Home</div>
+        <div onClick={()=> void navigateHome()} className='cursor-pointer text-xl rounded p-2 bg-green-500 mt-10'>Home</div>
         {isEditable && <div className='flex flex-col mt-4 bg-slate-300 p-4 rounded'>
             
             <label htmlFor="name">Name</label>

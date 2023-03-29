@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
+// import Link from "next/link";
 
-import { api } from "~/utils/api";
-import CourseCard from "./components/CourseCard";
+// import { api } from "~/utils/api";
+// import CourseCard from "./components/CourseCard";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     try {
       const redirectToCourses = async()=> await router.push('/courses');
-      redirectToCourses();
+      void redirectToCourses();
     } catch (error) {
       console.log(error);
     }
