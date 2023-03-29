@@ -1,0 +1,7 @@
+FROM prismagraphql/prisma:1.34
+WORKDIR /app
+COPY prisma/schema.prisma .
+COPY prisma/.env .
+RUN prisma generate
+EXPOSE 4466
+CMD [ "prisma", "serve" ]
