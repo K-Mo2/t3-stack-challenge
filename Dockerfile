@@ -1,20 +1,16 @@
 # stage 1 building the code
-FROM node as builder
-WORKDIR /usr/app
-COPY package*.json ./
+FROM node 
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package*.json /usr/src/app/
 RUN npm install
 COPY . .
+
+COPY . /usr/src/app
+
 RUN npm run build
-
-# stage 2
-FROM node
-WORKDIR /usr/app
-COPY package*.json ./
-RUN npm install --production
-
-COPY --from=builder /usr/app/dist ./dist
 
 COPY .env .
 
-EXPOSE 4000
-CMD node dist/src/index.js
+EXPOSE 3000
+CMD npm run dev

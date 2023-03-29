@@ -11,8 +11,14 @@ services:
     ports:
       - "5432:5432"
   web:
-    image: t3-app
+    image: t3-stack-challenge
     depends_on:
       - db
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
     ports:
       - "4000:4000"
